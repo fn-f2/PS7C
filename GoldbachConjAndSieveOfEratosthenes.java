@@ -10,6 +10,12 @@ public class GoldbachConjAndSieveOfEratosthenes
 
         System.out.println("Enter an even number greater than 2");
 
+        ArrayList<Integer> s = sieve(100);
+        for (int i = 0; i < s.size(); i++)
+        {
+            System.out.println(s.get(i));
+        }
+
         if (!in.hasNextInt())
         {
             System.out.println("Not a valid number");
@@ -48,26 +54,23 @@ public class GoldbachConjAndSieveOfEratosthenes
     {
         ArrayList<Integer> lst = new ArrayList();
 
-
-        for (int i = 0; i < n-2; i++)
+        for (int i = 2; i < n; i++)
         {
-            lst.add(i+2);
+            lst.add(i);
         }
-        
+
         int p = 2;
-        int i = 0;
-        while (p <= Math.sqrt(n))
+        for (int j = 0; j < lst.size(); j++)
         {
-            for (int j = 0; j < lst.size(); j++)
+            for (int i = j+1; i < lst.size(); i++)
             {
-                if (p != lst.get(j) && lst.get(j)%p == 0)
+                if (lst.get(i)%p == 0)
                 {
-                    lst.remove(j);
-                    j--;
+                    lst.remove(i);
+                    i--;
                 }
             }
-            i++;
-            p = lst.get(i);
+            p = lst.get(j);
         }
 
         return lst;
